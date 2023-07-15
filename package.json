@@ -1,0 +1,9 @@
+{
+  "name": "p2poker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "peerjs": "^1.4.7"
+  }
+}
