@@ -19,7 +19,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 150px;
+  margin: 3rem;
 }
 
 #showResult {
@@ -63,6 +63,9 @@ body {
   text-align: center;
   display: none;
 }
+.person.voted {
+  background-color: #46ea90;
+}
 #table.show .person::before {
   display: block;
 }
@@ -71,6 +74,8 @@ body {
 #deck {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .card {
   padding: 20px;

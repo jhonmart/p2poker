@@ -1,11 +1,23 @@
 const cards = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, "?"];
 
+function updateVote(conn, data) {
+  const person = document.querySelector(`[user-id='${conn.peer || conn.id}']`);
+  if (!person) return; 
+  person.setAttribute("user-vote", data.card || "");
+
+  if (Number.isInteger(parseInt(data.card))) person.classList.add("voted");
+  else person.classList.remove("voted");
+  return person;
+}
+
 function genereteUser(user, idx, list) {
-  // if (document.querySelector(`[user-name='${user.name}']`)) return; // Mudar para id
   const person = document.createElement("div");
   const count = list.length;
 
   person.classList.add("person");
+  if (Number.isInteger(parseInt(user.vote))) person.classList.add("voted");
+  else person.classList.remove("voted");
+
   const angle = (idx / count) * 2 * Math.PI;
   const radius = table.offsetWidth - 150; // 50 é o raio da bolinha
   const left =
@@ -18,6 +30,7 @@ function genereteUser(user, idx, list) {
   person.style.top = `${top}px`;
   person.setAttribute("user-name", user.name);
   person.setAttribute("user-vote", user.vote);
+  person.setAttribute("user-id", user.id);
 
   table.appendChild(person);
 }
@@ -30,6 +43,8 @@ function createUpdateUser() {
       element.remove();
     });
   list.forEach(genereteUser);
+  const show = table.classList.contains("show");
+  updateAverage(show);
 }
 
 function generateCards(card) {
@@ -37,7 +52,9 @@ function generateCards(card) {
   el.innerText = card;
   el.onclick = () => {
     const selected = el.classList.contains("selected");
-    sendCard(card, selected);
+
+    updateVote(myConfig, { card });
+    sendCard(selected ? '-' : card);
     if (selected) el.classList.remove("selected");
     else {
       document
@@ -50,12 +67,55 @@ function generateCards(card) {
   deck.append(el);
 }
 
+function findClosestNumber(unknownNumber) {
+  let closestNumber = null;
+  let minDistance = Infinity;
+  const list = cards.slice(0,-1);
+
+  for (let i = 0; i < list.length; i++) {
+    const currentNumber = list[i];
+    
+    if (typeof currentNumber === 'number') {
+      const distance = Math.abs(currentNumber - unknownNumber);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestNumber = currentNumber;
+      }
+    }
+  }
+
+  return closestNumber;
+}
+
+function calcAverage() {
+  const listVotes = Object.values(votes);
+  const average = listVotes.reduce((acc,actual)=> ["?", "-", ""].includes(actual) ? acc : acc+actual,0) / listVotes.length
+  return findClosestNumber(average);
+}
+
+function updateAverage(show) {
+  if (show) {
+    const closeNumber = calcAverage();
+    showResult.innerHTML = `Media: <b>${closeNumber}</b><br>Esconder`;
+  } else {
+    showResult.innerHTML = "Revelar";
+  }
+}
+
+function changeViewState(show) {
+  if (show) {
+    table.classList.add("show");
+  } else {
+    table.classList.remove("show");
+  }
+}
+
 cards.forEach(generateCards);
 
 showResult.onclick = function() {
-  const show = table.classList.contains("show");
-  showResult.innerText = show ? "Revelar" : "Esconder";
-  if (show) table.classList.remove("show");
-  else table.classList.add("show");
-  sendEveryone({ show: true });
+  const show = !table.classList.contains("show");
+  changeViewState(show);
+  updateAverage(show);
+  sendEveryone({ show });
 }

@@ -52,7 +52,8 @@ const controller = (user, obj) => {
     const ansewer = {
       users: othersUsers.map(conn => conn.peer),
       userUpdateList: true,
-      source: myConfig
+      source: myConfig,
+      myVote: votes[myConfig.id]
     };
     const connUser = othersUsers.find(conn => user.peer === conn.peer);
     connUser.send(ansewer);
@@ -61,7 +62,6 @@ const controller = (user, obj) => {
       createUpdateUser();
     }
   } else if (obj.election) {
-    console.log(obj)
     if (myConfig.birthday < obj.election) {
       myConfig.master = true;
       location.hash = user.peer;
@@ -75,18 +75,24 @@ const controller = (user, obj) => {
   } else if (obj.userUpdateList && obj.source.master) {
     if (obj.source.date > myConfig.updateDate)
       myConfig.updateDate = obj.source.date;
+    votes[user.peer] = obj.myVote;
     obj.users.map(addConn);
   } else if (obj.card) {
-    votes[user.peer] = obj.card;
-    createUpdateUser();
+    if (obj.card === "-") votes[user.peer] = "";
+    else votes[user.peer] = obj.card;
+    updateVote(user, obj);
+  } else if ([true, false].includes(obj.show)) {
+    changeViewState(obj.show);
+    updateAverage(obj.show);
   }
 }
 
 const sendEveryone = msg => othersUsers.forEach(conn => conn.send(msg));
 
-const sendCard = value => {
-  sendEveryone({ card: value });
-  votes[myConfig.id] = value;
+const sendCard = card => {
+  if (card === "-") votes[myConfig.id] = "";
+  else votes[myConfig.id] = card;
+  sendEveryone({ card });
   createUpdateUser();
 };
 
