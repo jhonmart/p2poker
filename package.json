@@ -1,9 +1,30 @@
 {
-  "name": "p2poker",
+  "name": "p2poker-nuxt",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test:e2e": "wdio wdio.conf.js"
+  },
   "dependencies": {
-    "peerjs": "^1.4.7"
+    "core-js": "^3.25.3",
+    "nuxt": "^2.15.8",
+    "nuxt-buefy": "^0.4.24",
+    "peerjs": "^1.4.7",
+    "vue": "^2.7.10",
+    "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.14",
+    "vuex-persistedstate": "^4.1.0"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.15.8",
+    "@nuxt/typescript-build": "^2.1.0",
+    "eslint-plugin-wdio": "^7.21.0",
+    "node-sass": "^9.0.0",
+    "sass": "^1.57.1",
+    "sass-loader": "^10"
   }
 }

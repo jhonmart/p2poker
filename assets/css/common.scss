@@ -1,0 +1,28 @@
+html {
+  overflow-y: auto !important;
+}
+
+// Custom
+.is-30w .sidebar-content {
+  min-width: 30vw;
+}
+.width-60v {
+  width: 60vw;
+}
+.width-100 {
+  width: 100%;
+}
+.flex-1 {
+  flex: 1;
+}
+.is-grabbing {
+  cursor: grabbing;
+}
+.is-small {
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  span .mdi:before {
+    font-size: 18px !important;
+  }
+}

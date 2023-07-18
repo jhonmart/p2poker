@@ -1,0 +1,141 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+
+@import "./common";
+
+// Set variables
+@import "./variables.scss";
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: mergeColorMaps(
+    (
+        "white": (
+            $white,
+            $black,
+        ),
+        "black": (
+            $black,
+            $white,
+        ),
+        "light": (
+            $light,
+            $light-invert,
+        ),
+        "dark": (
+            $dark,
+            $dark-invert,
+        ),
+        "primary": (
+            $primary,
+            $primary-invert,
+            $primary-light,
+            $primary-dark,
+        ),
+        "link": (
+            $link,
+            $link-invert,
+            $link-light,
+            $link-dark,
+        ),
+        "info": (
+            $info,
+            $info-invert,
+            $info-light,
+            $info-dark,
+        ),
+        "success": (
+            $success,
+            $success-invert,
+            $success-light,
+            $success-dark,
+        ),
+        "warning": (
+            $warning,
+            $warning-invert,
+            $warning-light,
+            $warning-dark,
+        ),
+        "danger": (
+            $danger,
+            $danger-invert,
+            $danger-light,
+            $danger-dark,
+        ),
+        "blue-oil": (
+            $blue-oil,
+            $blue-oil-invert,
+            $blue-oil-light,
+            $blue-oil-dark,
+        ),
+        "gray-dark": (
+            $gray-dark,
+            $gray-dark-invert,
+            $gray-dark-light,
+            $gray-dark-dark,
+        ),
+        "green": (
+            $green,
+            $green-invert,
+            $green-light,
+            $green-dark,
+        ),
+        "yellow": (
+            $yellow,
+            $yellow-invert,
+            $yellow-light,
+            $yellow-dark,
+        ),        
+        "noturno": (
+            $noturno,
+            $noturno-invert,
+            $noturno-light,
+            $noturno-dark,
+        ),
+        "secondary": (
+            $secondary,
+            $secondary-invert,
+            $secondary-light,
+            $secondary-dark,
+        ),
+        "ternary": (
+            $ternary,
+            $ternary-invert,
+            $ternary-light,
+            $ternary-dark,
+        ),
+        "dark-blue": (
+            #303135,
+            findLightColor(#303135),
+            findDarkColor(#303135),
+            findColorInvert(#303135),
+        ),
+        "dark-google": (
+            #303135,
+            findLightColor(#303135),
+            findDarkColor(#303135),
+            findColorInvert(#303135),
+        ),
+        "blood": (
+            #ec4137,
+            findLightColor(#ec4137),
+            findDarkColor(#ec4137),
+            findColorInvert(#ec4137)
+        ),
+    ),
+    $custom-colors
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// input
+$input-background-color: #303135;
+$input-color: $white;
+
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";

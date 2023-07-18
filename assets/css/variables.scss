@@ -1,0 +1,86 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+
+// Set your colors
+$primary: #7200CB;
+$primary-light: findLightColor($primary);
+$primary-dark: findDarkColor($primary);
+$primary-invert: findColorInvert($primary);
+$twitter: #4099FF;
+$twitter-invert: findColorInvert($twitter);
+
+// Custom
+$blue-oil: #465564;
+$blue-oil-light: findLightColor($blue-oil);
+$blue-oil-dark: findDarkColor($blue-oil);
+$blue-oil-invert: findColorInvert($blue-oil);
+
+$noturno: #1E1E1E;
+$noturno-light: findLightColor($noturno);
+$noturno-dark: findDarkColor($noturno);
+$noturno-invert: findColorInvert($noturno);
+
+$gray-dark: #858585;
+$gray-dark-light: findLightColor($gray-dark);
+$gray-dark-dark: findDarkColor($gray-dark);
+$gray-dark-invert: findColorInvert($gray-dark);
+
+$green: #5EB160;
+$green-light: findLightColor($green);
+$green-dark: findDarkColor($green);
+$green-invert: findColorInvert($green);
+
+$yellow: #D2AF26;
+$yellow-light: findLightColor($yellow);
+$yellow-dark: findDarkColor($yellow);
+$yellow-invert: findColorInvert($yellow);
+
+$secondary: #8901f1;
+$secondary-light: findLightColor($secondary);
+$secondary-dark: findDarkColor($secondary);
+$secondary-invert: findColorInvert($secondary);
+
+$ternary: #D9D9D9;
+$ternary-light: findLightColor($ternary);
+$ternary-dark: findDarkColor($ternary);
+$ternary-invert: findColorInvert($ternary);
+// Lists and maps
+$custom-colors: null !default;
+$custom-shades: null !default;
+
+// Custum
+
+// Menu
+$menu-item-hover-background-color: $gray-dark;
+
+// Input
+$input-color: $black;
+$input-icon-color: $blue-oil;
+
+// $input-border-color
+$input-background-color: $ternary;
+$input-disabled-background-color: #8a8a8a;
+
+// Table
+$table-color: $white;
+$table-head-cell-color: $white;
+$table-background-color: $noturno;
+
+// Fields
+$label-color: $white;
+
+// Steps
+$steps-details-background-color: $noturno;
+
+// Pagination
+$pagination-current-color: $white;
+// $pagination-current-background-color: $ternary;
+$pagination-current-border-color: $ternary;
+$pagination-color: $white;
+// $pagination-border-color: $background-color-3;
+$pagination-disabled-background-color: $noturno;
+// $pagination-disabled-border-color: $background-color-2;
+$pagination-hover-color: $ternary;
+$pagination-hover-border-color: $ternary;
+// $pagination-focus-border-color: none;
