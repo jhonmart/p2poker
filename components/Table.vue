@@ -4,13 +4,13 @@
       <div class="card-symbols"></div>
       <button id="showResult">Revelar</button>
       <span
-        v-for="(person, idx) in people"
+        v-for="(person, idx) in getPeople"
         :key="person.id"
         :user-name="person.name"
         :user-id="person.id"
         :user-vote="person.vote"
         class="person"
-        :class="{ voted: Boolean(person.vote) }"
+        :class="{ voted: checkVote(person.vote)  }"
         :style="calcPosition(idx)"
       >
         <b>{{ emoji[idx] || "🌞" }}</b>
@@ -30,19 +30,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getUsersData"]),
-    people() {
-      return Object.entries(this.getUsersData)
-        .reduce((acc, current) =>
-          acc.concat([{ id: current[0], ...current[1] }]),
-          []
-        );
-    }
+    ...mapGetters(["getPeople"])
   },
   methods: {
     calcPosition(idx) {
       const tableEl = this.$refs.table;
-      const angle = (idx / this.people.length) * 2 * Math.PI;
+      if (!tableEl) return;
+      const angle = (idx / this.getPeople.length) * 2 * Math.PI;
       const radius = tableEl.offsetWidth - 150;
       const left =
         Math.round(Math.cos(angle) * radius + tableEl.offsetWidth / 2) -
@@ -51,6 +45,9 @@ export default {
         Math.round(Math.sin(angle) * radius + tableEl.offsetHeight / 2) -
         tableEl.offsetHeight * 0.1;
       return `left: ${left}px;top: ${top}px`;
+    },
+    checkVote(vote) {
+      return vote && vote !== "-";
     }
   }
 }

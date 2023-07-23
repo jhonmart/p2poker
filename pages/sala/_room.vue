@@ -8,31 +8,27 @@
 <script>
 import Deck from '@/components/Deck.vue';
 import Table from '@/components/Table.vue';
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Room",
   components: { Deck, Table },
   middleware: "hasName",
-  data() {
-    return {
-    };
-  },
   computed: {
-    ...mapGetters(["getMyID", "getMyName"]),
+    ...mapGetters(["getMyID", "getMyName", "getPeerInstance"]),
     room() {
       return this.$route.params.room;
     }
   },
   watch: {
-    getMyID(myUID) {
-      console.log(myUID)
-      if (this.room) this.addConn(this.room);
+    getPeerInstance() {
+      const myUID = this.getMyID;
+      if (this.room) this.addServe(this.room);
       else if (myUID) this.$router.push("/sala/" + myUID);
     }
   },
   methods: {
-    ...mapMutations(["addConn"])
+    ...mapActions(["addServe"])
   }
 }
 </script>

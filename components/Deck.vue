@@ -24,11 +24,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["sendEveryone"]),
+    ...mapActions(["sendEveryone", "updateMe"]),
     setVote(card) {
-      if (this.vote === card) this.vote = "";
+      if (this.vote === card) this.vote = "-";
       else this.vote = card;
       this.sendEveryone({ card });
+      this.updateMe({ vote: this.vote });
     }
   }
 }

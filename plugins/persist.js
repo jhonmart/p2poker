@@ -8,7 +8,8 @@ export default ({ store }) => {
         ...state.p2p,
         peerInstance: {},
         usersData: {},
-        usersConn: []
+        usersConn: [],
+        master: {}
       }}))
     }
   })(store);
